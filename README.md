@@ -1,1 +1,3 @@
-# TAK17 project
+# KIG17 project
+
+School project.
