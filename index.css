@@ -1,5 +1,9 @@
+@import url('https://fonts.googleapis.com/css?family=Cousine');
+
 body {
   margin: 0;
+  font-family: 'Cousine', monospace;
+
 }
 main {
   display: flex;
