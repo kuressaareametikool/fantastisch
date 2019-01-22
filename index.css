@@ -1,3 +1,17 @@
 body {
-	background-color: blue;
+  margin: 0;
+}
+main {
+  display: flex;
+}
+aside {
+  width: 150px;
+}
+textarea {
+  width: 50vw;
+  height: 100vh;
+  background: gray;
+  color: white;
+  padding: 15px;
+  outline: none;
 }

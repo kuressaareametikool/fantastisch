@@ -35,12 +35,14 @@ new Vue({
     });
   },
   template: `
-    <div>
-      <div
+    <main>
+      <aside>
+        <div
         v-for="m in messages"
         :style="{fontWeight: m.name === filterName ? 'bold' : 'normal'}"
         @click="filterName = m.name"
       >{{ m.name }}</div>
+      </aside>
       <textarea
         v-if="name === filterName"
         rows="20"
@@ -55,6 +57,6 @@ new Vue({
         type="text"
         v-model="messages.filter(m => m.name === filterName)[0].message"
       />
-    </div>
+  </main>
   `
 });
