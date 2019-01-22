@@ -3,7 +3,7 @@
 body {
   margin: 0;
   font-family: 'Cousine', monospace;
-
+  font-size: 14px;
 }
 main {
   display: flex;
@@ -12,10 +12,19 @@ aside {
   width: 150px;
 }
 textarea {
+  font-family: 'Cousine', monospace;
   width: 50vw;
   height: 100vh;
   background: #263238;
   color: white;
   padding: 15px;
   outline: none;
+  border: none;
+  font-size: 14px;
+}
+.user {
+  background: #263238;
+  color: white;
+  padding: 10px;
+  border-bottom: 1px solid white;
 }

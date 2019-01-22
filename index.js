@@ -37,9 +37,9 @@ new Vue({
   template: `
     <main>
       <aside>
-        <div
+        <div class="user"
         v-for="m in messages"
-        :style="{fontWeight: m.name === filterName ? 'bold' : 'normal'}"
+        :style="{opacity: m.name === filterName ? 1 : 0.5}"
         @click="filterName = m.name"
       >{{ m.name }}</div>
       </aside>
