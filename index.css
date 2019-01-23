@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=IBM+Plex+Sans|Cousine');
-
+* {
+  box-sizing: border-box;
+}
 body {
   margin: 0;
   font-family: 'IBM Plex Sans', sans-serif;
@@ -19,16 +21,40 @@ textarea {
   height: 100vh;
   /* background: pink; sorri kika, me lihtsalt peame teadma kas see roosana toimiks*/
   background: #263238;
+  --background: pink;
   color: white;
   padding: 15px;
   outline: none;
   border: none;
   font-size: 14px;
 }
+textarea[disabled] {
+  color: rgba(255,255,255,0.5)
+}
+
+
 .user {
+  display: flex;
   color: white;
-  padding: 3px 10px;
+  padding: 6px 10px;
+  cursor: pointer;
+}
+.user > * {
+  margin: 0 3px;
 }
 .user:first-child {
-  padding-top: 10px;
+  padding-top: 12px;
+}
+.user.selected {
+  background: #263238;
+}
+.user input[type=text] {
+  width: 80px;
+  padding: 0;
+  border: none;
+  outline: none;
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 14px;  
+  background: none;
+  color: white;
 }
