@@ -1,8 +1,8 @@
-@import url('https://fonts.googleapis.com/css?family=Cousine');
+@import url('https://fonts.googleapis.com/css?family=IBM+Plex+Sans|Cousine');
 
 body {
   margin: 0;
-  font-family: 'Cousine', monospace;
+  font-family: 'IBM Plex Sans', sans-serif;
   font-size: 14px;
 }
 main {
@@ -10,6 +10,8 @@ main {
 }
 aside {
   width: 150px;
+  height: 100vh;
+  background: #2d3c43;
 }
 textarea {
   font-family: 'Cousine', monospace;
@@ -23,8 +25,9 @@ textarea {
   font-size: 14px;
 }
 .user {
-  background: #263238;
   color: white;
-  padding: 10px;
-  border-bottom: 1px solid white;
+  padding: 3px 10px;
+}
+.user:first-child {
+  padding-top: 10px;
 }
