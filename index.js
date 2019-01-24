@@ -3,19 +3,21 @@ import { any, titleCase } from "https://designstem.github.io/fachwerk/utils.js";
 import Me from "./components/Me.js";
 import User from "./components/User.js";
 import Preview from "./components/Preview.js";
+import Theme from "./components/Theme.js";
 
 import { animals } from "./names.js";
 
 new Vue({
   el: "#app",
-  components: { Me, User, Preview },
+  components: { Theme, Me, User, Preview },
   data: {
     name: "",
     displayname: "",
     filterName: "",
     messages: [],
     currentMessage: "",
-    socket: null
+    socket: null,
+    theme: 1,
   },
   mounted() {
     const name = store.get("name");
@@ -57,6 +59,7 @@ new Vue({
     };
   },
   template: `
+    <Theme :theme="['blue','pink'][theme]">
     <main>
       <aside>
         <Me
@@ -90,5 +93,7 @@ new Vue({
       />
       <Preview style="flex: 1" :content="currentMessage" />
   </main>
+  <button @click="theme = 1 - theme" style="position: fixed; left: 10px; bottom: 10px;">Change theme</button>
+  </Theme>
   `
 });

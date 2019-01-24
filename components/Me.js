@@ -33,7 +33,7 @@ export default {
   <div class="me">
     <div style="display: flex;">
       <div
-        :style="{color: active ? '#56e39f' : 'gray'}"
+        :style="{color: active ? 'var(--active)' : 'var(--inactive)'}"
       >●</div>&nbsp;
       <div
       v-if="state == 'idle' || state == 'hover'"

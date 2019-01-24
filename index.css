@@ -13,14 +13,14 @@ main {
 aside {
   width: 150px;
   height: 100vh;
-  background: rgba(244, 208, 208, 0.36);
+  background: var(--aside-bg);
 }
-textarea {
+main textarea {
   font-family: 'Cousine', monospace;
   flex: 0.9;
   height: 100vh;
-  background: #F4D0D0;
-  color: rgba(0,0,0,0.5);
+  background: var(--textarea-bg);
+  color: var(--textarea-color);
   padding: 15px;
   outline: none;
   border: none;
@@ -28,7 +28,7 @@ textarea {
   line-height: 1.5em;
 }
 textarea[disabled] {
-  color: #44140)
+  color: var(--textarea-color-disabled)
 }
 
 /* Me */
@@ -36,13 +36,13 @@ textarea[disabled] {
 .me {
   display: flex;
   justify-content: space-between;
-  color: #444140;
+  color: var(--textarea-color);
   font-size: 13px;
   padding: 6px 10px;
   cursor: pointer;
 }
 .me.selected {
-  background: #F4D0D0;
+  background: var(--textarea-bg);
 }
 .me input[type=text] {
   width: 80px;
@@ -52,7 +52,7 @@ textarea[disabled] {
   font-family: 'IBM Plex Sans', sans-serif;
   font-size: 13px;
   background: none;
-  color: #444140;
+  color: var(--textarea-color);
   background: rgba(0,0,0,0.05);
 }
 
@@ -60,13 +60,11 @@ textarea[disabled] {
 
 .user {
   display: flex;
-  color: #444140;
+  color: var(--textarea-color);
+  font-size: 13px;
   padding: 6px 10px;
   cursor: pointer;
 }
-.user > * {
-  margin: 0 3px;
-}
 .user.selected {
-  background: #F4D0D0;
+  background: var(--textarea-bg);
 }

@@ -20,20 +20,16 @@ export default {
   },
   template: `
   <div class="user">
+    <div style="display: flex">
     <div
-      :style="{color: active ? '#56e39f' : 'gray'}"
-    >●</div> 
-    <input
-      v-if="value"
-      type="text"
-      :value="value"
-      @input="$emit('input', $event.target.value)"
-    />
+      :style="{color: active ? 'var(--active)' : 'var(--inactive)'}"
+    >●</div>&nbsp;
+    </div>
     <div
       v-if="!value"
       :style="{transition: 'all 1s', opacity: active ? 1 : 0.25}"
     >{{ displayname }}</div>
-    <div v-if="me" :style="{opacity: 0.25}">me</div>
+</div>
   </div>
   `
 };
