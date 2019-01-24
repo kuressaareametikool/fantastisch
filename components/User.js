@@ -21,7 +21,7 @@ export default {
   template: `
   <div class="user">
     <div
-      :style="{color: active ? 'green' : 'gray'}"
+      :style="{color: active ? '#56e39f' : 'gray'}"
     >●</div> 
     <input
       v-if="value"

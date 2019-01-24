@@ -13,14 +13,14 @@ main {
 aside {
   width: 150px;
   height: 100vh;
-  background: #2d3c43;
+  background: rgba(244, 208, 208, 0.36);
 }
 textarea {
   font-family: 'Cousine', monospace;
-  width: 50vw;
+  flex: 0.9;
   height: 100vh;
   /* background: pink; sorri kika, me lihtsalt peame teadma kas see roosana toimiks*/
-  background: #263238;
+  background: #F4D0D0;
   --background: pink;
   color: white;
   padding: 15px;
@@ -29,13 +29,13 @@ textarea {
   font-size: 14px;
 }
 textarea[disabled] {
-  color: rgba(255,255,255,0.5)
+  color: #44140)
 }
 
 
 .user {
   display: flex;
-  color: white;
+  color: #444140;
   padding: 6px 10px;
   cursor: pointer;
 }
@@ -46,7 +46,7 @@ textarea[disabled] {
   padding-top: 12px;
 }
 .user.selected {
-  background: #263238;
+  background: #F4D0D0;
 }
 .user input[type=text] {
   width: 80px;
@@ -56,5 +56,5 @@ textarea[disabled] {
   font-family: 'IBM Plex Sans', sans-serif;
   font-size: 14px;  
   background: none;
-  color: white;
+  color: #444140;
 }
