@@ -27,11 +27,37 @@ textarea {
   outline: none;
   border: none;
   font-size: 14px;
+  line-height: 1.5em;
 }
 textarea[disabled] {
   color: #44140)
 }
 
+/* Me */
+
+.me {
+  display: flex;
+  justify-content: space-between;
+  color: #444140;
+  padding: 6px 10px;
+  cursor: pointer;
+}
+.me.selected {
+  background: #F4D0D0;
+}
+.me input[type=text] {
+  width: 80px;
+  padding: 0px;
+  border: none;
+  outline: none;
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 14px;  
+  background: none;
+  color: #444140;
+  background: rgba(0,0,0,0.05);
+}
+
+/* User */
 
 .user {
   display: flex;
@@ -41,9 +67,6 @@ textarea[disabled] {
 }
 .user > * {
   margin: 0 3px;
-}
-.user:first-child {
-  padding-top: 12px;
 }
 .user.selected {
   background: #F4D0D0;

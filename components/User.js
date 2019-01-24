@@ -1,5 +1,5 @@
 export default {
-  props: ["displayname", "value", "message", "me"],
+  props: ["displayname", "value", "message"],
   data: () => ({ currentValue: '', timeout: false, active: true }),
   mounted() {
     //this.currentValue = this.value

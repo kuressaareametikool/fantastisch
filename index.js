@@ -1,11 +1,6 @@
-//import * as components from "https://designstem.github.io/fachwerk/components.js";
-//import { Init } from "https://designstem.github.io/fachwerk/mixins.js";
-// for (const name in components) {
-//   Vue.component(name, components[name]);
-// }
-
 import { any, titleCase } from "https://designstem.github.io/fachwerk/utils.js";
 
+import Me from "./components/Me.js";
 import User from "./components/User.js";
 import Preview from "./components/Preview.js";
 
@@ -13,7 +8,7 @@ import { animals } from "./names.js";
 
 new Vue({
   el: "#app",
-  components: { User, Preview },
+  components: { Me, User, Preview },
   data: {
     name: "",
     displayname: "",
@@ -64,12 +59,11 @@ new Vue({
   template: `
     <main>
       <aside>
-        <User
+        <Me
           :class="{ selected: name === filterName }"
           @click.native="filterName = name"
           v-model="displayname"
           :message="currentMessage"
-          :me="true"
         />
         <User
           v-for="m in messages.filter(m => m.name !== name)"
