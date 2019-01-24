@@ -10,7 +10,7 @@ export default {
           clearTimeout(this.timeout);
         }
         this.active = true;
-        this.timeout = setTimeout(() => (this.active = false), 2000);
+        this.timeout = setTimeout(() => (this.active = false), 1000*60*2);
       },
       { immediate: true }
     );
