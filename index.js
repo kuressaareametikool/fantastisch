@@ -76,6 +76,7 @@ new Vue({
   template: `
     <Theme :theme="['blue','pink'][theme]">
     <main>
+      
       <aside>
         <Me
           :class="{ selected: name === filterName }"
@@ -84,7 +85,8 @@ new Vue({
           :message="currentMessage"
         />
         <User
-          v-for="m in messages.filter(m => m.name !== name)"
+          v-for="(m,i) in messages.filter(m => m.name !== name)"
+          :key="i"
           :class="{ selected: m.name === filterName }"
           @click.native="filterName = m.name"
           :displayname="m.displayname"
@@ -125,7 +127,7 @@ new Vue({
       cursor: pointer;
       color: var(--themebutton);
     "
-  >⬤</button>
+  >⬤</div>
   </Theme>
   `
 });
