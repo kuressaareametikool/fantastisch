@@ -116,7 +116,16 @@ new Vue({
       />
 
   </main>
-  <button @click="theme = 1 - theme" style="position: fixed; left: 10px; bottom: 10px;">Change theme</button>
+  <div
+    @click="theme = 1 - theme"
+    style="
+      position: fixed;
+      left: 10px;
+      bottom: 10px;
+      cursor: pointer;
+      color: var(--themebutton);
+    "
+  >⬤</button>
   </Theme>
   `
 });

@@ -10,6 +10,7 @@ export default {
         "--aside-bg": "hsl(200, 19%, 12%)",
         "--active": "green",
         "--inactive": "hsla(0, 0%, 100%, 0.2)",
+        "--themebutton": "hsl(0, 62%, 79%)",
       },
       pink: {
         "--me-textarea-bg": "hsl(0, 62%, 79%)",
@@ -19,6 +20,7 @@ export default {
         "--aside-bg": "hsl(0, 62%, 95%)",
         "--active": "#56e39f",
         "--inactive": "hsla(0, 0%, 0%, 0.2)",
+        "--themebutton": "hsl(200, 19%, 18%)",
       }
     }
   }),
