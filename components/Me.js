@@ -34,9 +34,6 @@ export default {
     clearTimeout(this.timeout);
   },
   methods: {
-    log(a) {
-      console.log(a);
-    },
     insertEmoji(emoji) {
       var startPos = this.$refs.edit.selectionStart;
       var endPos = this.$refs.edit.selectionEnd;
@@ -46,6 +43,7 @@ export default {
         this.$refs.edit.value.substring(endPos, this.$refs.edit.value.length);
       this.$refs.edit.selectionStart = startPos + 2;
       this.$refs.edit.selectionEnd = startPos + 2;
+      this.currentValue = this.$refs.edit.value
     }
   },
   template: `<div class="me">
