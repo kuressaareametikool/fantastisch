@@ -1,10 +1,13 @@
+import { emojis } from '../emojis.js'
+
 export default {
   props: ["value", "message"],
   data: () => ({
     currentValue: "",
     timeout: false,
     active: true,
-    state: "idle"
+    state: "idle",
+    emojis: emojis,
   }),
   mounted() {
     this.$watch("value", value => (this.currentValue = value), {
@@ -41,8 +44,8 @@ export default {
         this.$refs.edit.value.substring(0, startPos) +
         emoji +
         this.$refs.edit.value.substring(endPos, this.$refs.edit.value.length);
-      this.$refs.edit.selectionStart = startPos + 1;
-      this.$refs.edit.selectionEnd = startPos + 1;
+      this.$refs.edit.selectionStart = startPos + 2;
+      this.$refs.edit.selectionEnd = startPos + 2;
     }
   },
   template: ` <div>
@@ -88,17 +91,12 @@ export default {
    <div 
     v-show="state === 'edit'" 
     style="padding: 10px">
-    <a title="help" @click="insertEmoji('💬')">💬</a>
-    <a title="look">👁</a>
-    <a title="help me!">️‍ </a>
-    <a title="I am a mouse">🐹</a>
-    <a title="busy">🔒</a>
-    <a title="phone">📞</a> 
-    <a title="vacation">✈</a> 
-    <a title="happy">🙂</a> 
-    <a title="evil">🙁</a> 
-    <a title="done">✔</a> 
-    <a title="dead">✝</a> 
+
+    <a
+      v-for="(help, emoji) in emojis"
+      :title="help"
+      @click="insertEmoji(emoji)"
+    >{{ emoji }}</a>
     </div>
   </div>
   `
