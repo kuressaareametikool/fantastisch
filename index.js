@@ -20,6 +20,15 @@ new Vue({
     theme: 1,
   },
   mounted() {
+
+    const messages = store.get("messages");
+    if (messages) {
+      this.messages = messages
+    }
+    const currentMessage = store.get("currentMessage");
+    if (currentMessage) {
+      this.currentMessage = currentMessage
+    }
     const name = store.get("name");
     const displayname = store.get("displayname");
     this.name = name || titleCase(any(animals));
@@ -33,9 +42,13 @@ new Vue({
       store.set("displayname", newDisplayname);
     });
 
+    this.$watch("currentMessage", currentMessage => {
+      store.set("currentMessage", currentMessage);
+    });
+
     this.socket = io.connect("https://fantastischserver.now.sh");
     this.socket.on("message", m => {
-      if (m.name !== name) {
+      if (m.name !== name && m.type == 'code') {
         const index = this.messages.findIndex(
           messages => messages.name === m.name
         );
@@ -44,6 +57,7 @@ new Vue({
         } else {
           this.messages.push(m);
         }
+        store.set("messages", this.messages);
       }
     });
 
@@ -82,7 +96,7 @@ new Vue({
         rows="20"
         type="text"
         v-model="currentMessage"
-        @input="socket.emit('message', { message: currentMessage, name, displayname })"
+        @input="socket.emit('message', { message: currentMessage, name, displayname, type: 'code' })"
       />
       <textarea
         disabled

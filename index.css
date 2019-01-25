@@ -53,7 +53,7 @@ textarea[disabled] {
   font-size: 13px;
   background: none;
   color: var(--textarea-color);
-  background: rgba(0,0,0,0.05);
+  background: rgba(0,0,0,0.2);
 }
 
 /* User */
