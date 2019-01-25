@@ -69,7 +69,7 @@ export default {
       >&nbsp;&nbsp;✕</div>
     </div>
     </div>
-   <div v-show="state === 'edit'">💬 👁️‍ 🐹 ⁉ 🔒 📞 ✈ 🙂 🙁 ✔ ✝</div>
+   <div v-show="state === 'edit'" style="padding: 10px">💬 👁️‍ 🐹 ⁉ 🔒 📞 ✈ 🙂 🙁 ✔ ✝</div>
   </div>
   `
 };
