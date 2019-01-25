@@ -1,6 +1,18 @@
 export const emojis = {
   '💬': 'help',
   '👁': 'look',
+  ' ': 'help me',
+  '🐹': 'I am a mouse',
+  '🔒': 'busy',
+  '📞': 'phone',
+  '✈': 'vacation',
+  '🙂': 'happy',
+  '🙁': 'evil',
+  '✔': 'done',
+  '✝': 'dead',
+  
+  
+  
 }
 
 /*
