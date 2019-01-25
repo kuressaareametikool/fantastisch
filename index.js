@@ -90,22 +90,30 @@ new Vue({
           :message="m.message"
         />
       </aside>
+
       <textarea
-        v-if="name === filterName"
-        ref="editor"
-        rows="20"
-        type="text"
-        v-model="currentMessage"
-        @input="socket.emit('message', { message: currentMessage, name, displayname, type: 'code' })"
-      />
-      <textarea
+        class="user-textarea"
         disabled
         v-if="name !== filterName"
         rows="20"
         type="text"
         v-model="messages.filter(m => m.name === filterName)[0].message"
       />
-      <Preview style="flex: 1" :content="currentMessage" />
+
+      <textarea
+        class="me-textarea"
+        ref="editor"
+        rows="20"
+        type="text"
+        v-model="currentMessage"
+        @input="socket.emit('message', { message: currentMessage, name, displayname, type: 'code' })"
+      />
+
+      <Preview
+        v-if="name === filterName"
+        style="flex: 1" :content="currentMessage"
+      />
+
   </main>
   <button @click="theme = 1 - theme" style="position: fixed; left: 10px; bottom: 10px;">Change theme</button>
   </Theme>

@@ -15,20 +15,29 @@ aside {
   height: 100vh;
   background: var(--aside-bg);
 }
-main textarea {
+
+.me-textarea {
   font-family: 'Cousine', monospace;
   flex: 0.9;
   height: 100vh;
-  background: var(--textarea-bg);
-  color: var(--textarea-color);
   padding: 15px;
   outline: none;
   border: none;
   font-size: 14px;
   line-height: 1.5em;
+  background: var(--me-textarea-bg);
+  color: var(--me-textarea-color);
 }
-textarea[disabled] {
-  color: var(--textarea-color-disabled)
+.user-textarea {
+  font-family: 'Cousine', monospace;
+  flex: 0.9;
+  height: 100vh;
+  padding: 15px;
+  outline: none;
+  border: none;
+  font-size: 14px;
+  background: var(--user-textarea-bg);
+  color: var(--user-textarea-color);
 }
 
 /* Me */
@@ -40,10 +49,9 @@ textarea[disabled] {
   font-size: 13px;
   padding: 6px 10px;
   cursor: pointer;
+  background: var(--me-textarea-bg);
 }
-.me.selected {
-  background: var(--textarea-bg);
-}
+
 .me input[type=text] {
   width: 80px;
   padding: 0px;
@@ -66,5 +74,5 @@ textarea[disabled] {
   cursor: pointer;
 }
 .user.selected {
-  background: var(--textarea-bg);
+  background: var(--user-textarea-bg);
 }
