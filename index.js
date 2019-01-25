@@ -40,6 +40,7 @@ new Vue({
 
     this.$watch("displayname", newDisplayname => {
       store.set("displayname", newDisplayname);
+      this.socket.emit('message', { message: this.currentMessage, name: this.name, displayname: this.displayname, type: 'code' })
     });
 
     this.$watch("currentMessage", currentMessage => {
