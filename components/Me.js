@@ -10,9 +10,11 @@ export default {
     this.$watch("value", value => (this.currentValue = value), {
       immediate: true
     });
-    this.$watch("state", state => { if (state == 'edit') {
-      this.$refs.edit.focus()
-    }});
+    this.$watch("state", state => {
+      if (state == "edit") {
+        this.$refs.edit.focus();
+      }
+    });
     this.$watch(
       "message",
       _ => {
@@ -28,7 +30,21 @@ export default {
   unmounted() {
     clearTimeout(this.timeout);
   },
-  methods: { log(a) { console.log(a)} },
+  methods: {
+    log(a) {
+      console.log(a);
+    },
+    insertEmoji(emoji) {
+      var startPos = this.$refs.edit.selectionStart;
+      var endPos = this.$refs.edit.selectionEnd;
+      this.$refs.edit.value =
+        this.$refs.edit.value.substring(0, startPos) +
+        emoji +
+        this.$refs.edit.value.substring(endPos, this.$refs.edit.value.length);
+      this.$refs.edit.selectionStart = startPos + 1;
+      this.$refs.edit.selectionEnd = startPos + 1;
+    }
+  },
   template: ` <div>
   <div class="me">
     <div style="display: flex;">
@@ -72,7 +88,7 @@ export default {
    <div 
     v-show="state === 'edit'" 
     style="padding: 10px">
-    <a title="help">💬</a>
+    <a title="help" @click="insertEmoji('💬')">💬</a>
     <a title="look">👁</a>
     <a title="help me!">️‍ </a>
     <a title="I am a mouse">🐹</a>
