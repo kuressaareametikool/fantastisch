@@ -69,7 +69,21 @@ export default {
       >&nbsp;&nbsp;✕</div>
     </div>
     </div>
-   <div v-show="state === 'edit'" style="padding: 10px">💬 👁️‍ 🐹 ⁉ 🔒 📞 ✈ 🙂 🙁 ✔ ✝</div>
+   <div 
+    v-show="state === 'edit'" 
+    style="padding: 10px">
+    <a title="help">💬</a>
+    <a title="look">👁</a>
+    <a title="help me!">️‍ </a>
+    <a title="I am a mouse">🐹</a>
+    <a title="busy">🔒</a>
+    <a title="phone">📞</a> 
+    <a title="vacation">✈</a> 
+    <a title="happy">🙂</a> 
+    <a title="evil">🙁</a> 
+    <a title="done">✔</a> 
+    <a title="dead">✝</a> 
+    </div>
   </div>
   `
 };
