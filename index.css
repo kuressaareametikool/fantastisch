@@ -45,7 +45,7 @@ aside {
 .me {
   display: flex;
   justify-content: space-between;
-  color: var(--textarea-color);
+  color: var(--me-textarea-color);
   font-size: 13px;
   padding: 6px 10px;
   cursor: pointer;
@@ -60,7 +60,7 @@ aside {
   font-family: 'IBM Plex Sans', sans-serif;
   font-size: 13px;
   background: none;
-  color: var(--textarea-color);
+  color: var(--me-textarea-color);
   background: rgba(0,0,0,0.2);
 }
 
@@ -68,7 +68,7 @@ aside {
 
 .user {
   display: flex;
-  color: var(--textarea-color);
+  color: var(--user-textarea-color);
   font-size: 13px;
   padding: 6px 10px;
   cursor: pointer;
