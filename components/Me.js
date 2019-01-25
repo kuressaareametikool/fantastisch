@@ -29,7 +29,7 @@ export default {
     clearTimeout(this.timeout);
   },
   methods: { log(a) { console.log(a)} },
-  template: `
+  template: ` <div>
   <div class="me">
     <div style="display: flex;">
       <div
@@ -68,6 +68,8 @@ export default {
         @click="state = 'idle';"
       >&nbsp;&nbsp;✕</div>
     </div>
+    </div>
+   <div v-show="state === 'edit'">💬 👁️‍ 🐹 ⁉ 🔒 📞 ✈ 🙂 🙁 ✔ ✝</div>
   </div>
   `
 };
