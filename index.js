@@ -18,6 +18,8 @@ new Vue({
     currentMessage: "",
     socket: null,
     theme: 1,
+    currentChat: '',
+    chatMessages: []
   },
   mounted() {
 
@@ -60,6 +62,10 @@ new Vue({
         }
         store.set("messages", this.messages);
       }
+      if (m.type == 'chat') {
+        this.chatMessages.push(m);
+        store.set("chatMessages", this.chatMessages);
+      }
     });
 
     this.$refs.editor.onkeydown = function(e) {
@@ -73,10 +79,17 @@ new Vue({
       }
     };
   },
+  computed: {
+    formattedChatMessages() {
+      return this.chatMessages.map(m => `${m.displayname} wrote:
+
+${m.message}`).join('\n\n')
+    }
+  },
   template: `
     <Theme :theme="['blue','pink'][theme]">
     <main>
-      
+
       <aside>
         <Me
           :class="{ selected: name === filterName }"
@@ -92,15 +105,46 @@ new Vue({
           :displayname="m.displayname"
           :message="m.message"
         />
+        <User
+          :class="{ selected: filterName === 'chat' }"
+          @click.native="filterName = 'chat'"
+          displayname="Group chat"
+          :message="'a'"
+        />
       </aside>
+
+      <div v-if="name !== filterName && filterName === 'chat'"
+        style="display: flex; flex-direction: column; flex: 0.9;
+  height: 100vh; position: relative;"
+      >
+        <textarea
+          class="chat-textarea"
+          disabled
+          rows="20"
+          type="text"
+          v-model="formattedChatMessages"
+        />
+        <textarea
+          class="me-textarea"
+          style="flex: 0.8; opacity: 0.9"
+          rows="20"
+          type="text"
+          v-model="currentChat"
+          @keyup.shift.enter="socket.emit('message', { message: currentChat, name, displayname, type: 'chat' }); currentChat = ''"
+        />
+        <div
+          style="position: absolute; right: 10px; bottom: 10px; color: var(--user-textarea-color); cursor: pointer;"
+          @click="socket.emit('message', { message: currentChat, name, displayname, type: 'chat' }); currentChat = ''"
+        >Send</div>
+      </div>
 
       <textarea
         class="user-textarea"
         disabled
-        v-if="name !== filterName"
+        v-if="name !== filterName && filterName !== 'chat'"
         rows="20"
         type="text"
-        v-model="messages.filter(m => m.name === filterName)[0].message"
+        v-model="messages.filter(m => m.name === filterName && m.type == 'code')[0].message"
       />
 
       <textarea
@@ -113,7 +157,7 @@ new Vue({
       />
 
       <Preview
-        v-if="name === filterName"
+        v-if="name === filterName && filterName !== 'chat'"
         style="flex: 1" :content="currentMessage"
       />
 
