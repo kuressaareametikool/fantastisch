@@ -43,13 +43,16 @@ aside {
 /* Me */
 
 .me {
-  display: flex;
-  justify-content: space-between;
   color: var(--me-textarea-color);
+  background: var(--me-textarea-bg);
   font-size: 13px;
   padding: 6px 10px;
   cursor: pointer;
-  background: var(--me-textarea-bg);
+}
+
+.me .edit {
+  display: flex;
+  justify-content: space-between;
 }
 
 .me input[type=text] {

@@ -48,8 +48,8 @@ export default {
       this.$refs.edit.selectionEnd = startPos + 2;
     }
   },
-  template: ` <div>
-  <div class="me">
+  template: `<div class="me">
+  <div class="edit">
     <div style="display: flex;">
       <div
         :style="{color: active ? 'var(--active)' : 'var(--inactive)'}"
@@ -89,9 +89,9 @@ export default {
     </div>
     </div>
    <div 
-    v-show="state === 'edit'" 
-    style="padding: 10px">
-
+      v-show="state === 'edit'" 
+      style="padding-top: 10px"
+    >
     <a
       v-for="(help, emoji) in emojis"
       :title="help"
