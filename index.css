@@ -79,3 +79,20 @@ aside {
 .user.selected {
   background: var(--user-textarea-bg);
 }
+
+.chat-textarea {
+  font-family: 'Cousine', monospace;
+  flex: 2;
+  padding: 15px;
+  outline: none;
+  border: none;
+  font-size: 14px;
+  background: var(--user-textarea-bg);
+  color: var(--user-textarea-color);
+}
+
+/*
+<div v-if="name !== filterName && filterName === 'chat'"
+style="display: flex; flex-direction: column; flex: 0.9;
+height: 100vh;"
+*/
