@@ -51,7 +51,7 @@ export default {
     <div style="display: flex;">
       <div
         :style="{color: active ? 'var(--active)' : 'var(--inactive)'}"
-      >●</div>&nbsp;
+      >●</div>&nbsp;&nbsp;
       <div
       v-if="state == 'idle' || state == 'hover'"
       >
