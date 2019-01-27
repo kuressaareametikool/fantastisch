@@ -79,6 +79,17 @@ new Vue({
         return false;
       }
     };
+
+    this.$refs.editor2.onkeydown = function(e) {
+      if (e.keyCode === 9) {
+        const val = this.value;
+        const start = this.selectionStart;
+        const end = this.selectionEnd;
+        this.value = val.substring(0, start) + "  " + val.substring(end);
+        this.selectionStart = this.selectionEnd = start + 2;
+        return false;
+      }
+    };
   },
   computed: {
     formattedChatMessages() {
@@ -114,7 +125,7 @@ ${m.message}`).join('\n\n')
         />
       </aside>
 
-      <div v-if="name !== filterName && filterName === 'chat'"
+      <div v-show="name !== filterName && filterName === 'chat'"
         style="display: flex; flex-direction: column; flex: 0.9;
   height: 100vh; position: relative; padding: 15px; background: var(--user-textarea-bg)"
       >
@@ -125,6 +136,7 @@ ${m.message}`).join('\n\n')
           />
         </div>
         <textarea
+          ref="editor2"
           class="me-textarea"
           style="flex: 0.8; background: var(--chat-textarea-bg)"
           rows="20"
