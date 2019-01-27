@@ -24,7 +24,7 @@ aside {
   outline: none;
   border: none;
   font-size: 14px;
-  line-height: 1.5em;
+  line-height: 1.75em;
   background: var(--me-textarea-bg);
   color: var(--me-textarea-color);
 }
@@ -36,6 +36,7 @@ aside {
   outline: none;
   border: none;
   font-size: 14px;
+  line-height: 1.75em;
   background: var(--user-textarea-bg);
   color: var(--user-textarea-color);
 }
@@ -81,6 +82,7 @@ aside {
 }
 
 .chat-textarea {
+  padding: 15px;
   font-family: 'Cousine', monospace;
   flex: 2;
   padding: 15px;

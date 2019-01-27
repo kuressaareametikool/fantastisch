@@ -3,6 +3,7 @@ export default {
   data: () => ({
     themes: {
       blue: {
+        "--chat-textarea-bg": "hsl(200, 19%, 24%)",
         "--me-textarea-bg": "hsl(200, 19%, 18%)",
         "--user-textarea-bg": "hsl(200, 19%, 28%)",
         "--me-textarea-color": "hsla(0, 0%, 100%, 0.8)",
@@ -13,10 +14,11 @@ export default {
         "--themebutton": "hsl(0, 62%, 79%)",
       },
       pink: {
+        "--chat-textarea-bg": "hsl(0, 62%, 83%)",
         "--me-textarea-bg": "hsl(0, 62%, 79%)",
         "--user-textarea-bg": "hsl(0, 62%, 89%)",
         "--me-textarea-color": "hsla(0, 0%, 0%, 0.8)",
-        "--user-textarea-color": "hsla(0, 0%, 0%, 0.6)",
+        "--user-textarea-color": "hsla(0, 0%, 0%, 0.8)",
         "--aside-bg": "hsl(0, 62%, 95%)",
         "--active": "#56e39f",
         "--inactive": "hsla(0, 0%, 0%, 0.2)",

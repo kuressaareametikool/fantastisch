@@ -4,12 +4,13 @@ import Me from "./components/Me.js";
 import User from "./components/User.js";
 import Preview from "./components/Preview.js";
 import Theme from "./components/Theme.js";
+import ChatMessage from "./components/ChatMessage.js";
 
 import { animals } from "./names.js";
 
 new Vue({
   el: "#app",
-  components: { Theme, Me, User, Preview },
+  components: { Theme, Me, User, Preview, ChatMessage },
   data: {
     name: "",
     displayname: "",
@@ -17,7 +18,7 @@ new Vue({
     messages: [],
     currentMessage: "",
     socket: null,
-    theme: 1,
+    theme: 0,
     currentChat: '',
     chatMessages: []
   },
@@ -115,25 +116,24 @@ ${m.message}`).join('\n\n')
 
       <div v-if="name !== filterName && filterName === 'chat'"
         style="display: flex; flex-direction: column; flex: 0.9;
-  height: 100vh; position: relative;"
+  height: 100vh; position: relative; padding: 15px; background: var(--user-textarea-bg)"
       >
-        <textarea
-          class="chat-textarea"
-          disabled
-          rows="20"
-          type="text"
-          v-model="formattedChatMessages"
-        />
+        <div style="flex: 1">
+          <ChatMessage
+            v-for="message in chatMessages"
+            :message="message"
+          />
+        </div>
         <textarea
           class="me-textarea"
-          style="flex: 0.8; opacity: 0.9"
+          style="flex: 0.8; background: var(--chat-textarea-bg)"
           rows="20"
           type="text"
           v-model="currentChat"
           @keyup.shift.enter="socket.emit('message', { message: currentChat, name, displayname, type: 'chat' }); currentChat = ''"
         />
         <div
-          style="position: absolute; right: 10px; bottom: 10px; color: var(--user-textarea-color); cursor: pointer;"
+          style="position: absolute; right: 25px; bottom: 25px; color: var(--user-textarea-color); cursor: pointer;"
           @click="socket.emit('message', { message: currentChat, name, displayname, type: 'chat' }); currentChat = ''"
         >Send</div>
       </div>
