@@ -28,6 +28,10 @@ new Vue({
     if (messages) {
       this.messages = messages
     }
+    const chatMessages = store.get("chatMessages");
+    if (chatMessages) {
+      this.chatMessages = chatMessages
+    }
     const currentMessage = store.get("currentMessage");
     if (currentMessage) {
       this.currentMessage = currentMessage
