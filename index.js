@@ -8,9 +8,68 @@ import ChatMessage from "./components/ChatMessage.js";
 
 import { animals } from "./names.js";
 
+const debounce = (fn, time) => {
+  let timeout;
+  return function() {
+    const functionCall = () => fn.apply(this, arguments);
+    clearTimeout(timeout);
+    timeout = setTimeout(functionCall, time);
+  };
+};
+
+const FEditorButton = {
+  template: `
+  <span style="color: var(--secondary); font-size: calc(var(--base) * 1.5); font-family: var(--mono); cursor: pointer; padding: 2px; margin-right: var(--base);">
+    <slot />
+  </span>
+  `
+};
+
+const HtmlEditor = {
+  props: ["value"],
+  data: () => ({ editor: null }),
+  methods: {
+    onFormat() {
+      const doc = this.editor.getDoc();
+      const { ch, line } = doc.getCursor();
+      const { formatted, cursorOffset } = prettier.formatWithCursor(
+        this.editor.getValue(),
+        {
+          printWidth: 60,
+          cursorOffset: ch,
+          parser: "html",
+          plugins: prettierPlugins
+        }
+      );
+      this.editor.setValue(formatted);
+      doc.setCursor({ ch: cursorOffset, line });
+      this.editor.focus();
+    }
+  },
+  mounted() {
+    this.editor = CodeMirror(this.$refs.editor, {
+      mode: "htmlmixed",
+      theme: "material",
+      lineWrapping: true,
+      viewportMargin: Infinity,
+      tabSize: 2,
+      lineNumbers: true
+    });
+    this.editor.setValue(this.value);
+    this.editor.on("change", debounce(editor => {
+        this.$emit("input", editor.getValue())
+    }, 100));
+  },
+  template: `
+  <div style="position: relative;">
+    <div style="position: absolute; top: 0; right: 0; bottom: 0; left: 0;" ref="editor" />
+  </div>
+  `
+};
+
 new Vue({
   el: "#app",
-  components: { Theme, Me, User, Preview, ChatMessage },
+  components: { Theme, Me, User, Preview, ChatMessage, HtmlEditor },
   data: {
     name: "",
     displayname: "",
@@ -73,7 +132,7 @@ new Vue({
       }
     });
 
-    this.$refs.editor.onkeydown = function(e) {
+    this.$refs.chat.onkeydown = function(e) {
       if (e.keyCode === 9) {
         const val = this.value;
         const start = this.selectionStart;
@@ -84,23 +143,8 @@ new Vue({
       }
     };
 
-    this.$refs.editor2.onkeydown = function(e) {
-      if (e.keyCode === 9) {
-        const val = this.value;
-        const start = this.selectionStart;
-        const end = this.selectionEnd;
-        this.value = val.substring(0, start) + "  " + val.substring(end);
-        this.selectionStart = this.selectionEnd = start + 2;
-        return false;
-      }
-    };
-  },
-  computed: {
-    formattedChatMessages() {
-      return this.chatMessages.map(m => `${m.displayname} wrote:
+    this.$refs.chat.focus();
 
-${m.message}`).join('\n\n')
-    }
   },
   template: `
     <Theme :theme="['blue','pink'][theme]">
@@ -133,16 +177,18 @@ ${m.message}`).join('\n\n')
         style="display: flex; flex-direction: column; flex: 0.9;
   height: 100vh; position: relative; padding: 15px; background: var(--user-textarea-bg)"
       >
-        <div style="flex: 1">
+        <div style="flex: 1.5; overflow: auto;">
           <ChatMessage
-            v-for="message in chatMessages"
+            v-for="(message,i) in chatMessages"
+            :key="i"
             :message="message"
           />
         </div>
         <textarea
-          ref="editor2"
+          placeholder="Send a message to the group"
+          ref="editor"
           class="me-textarea"
-          style="flex: 0.8; background: var(--chat-textarea-bg)"
+          style="flex: 0.5; background: var(--chat-textarea-bg); resize: none;"
           rows="20"
           type="text"
           v-model="currentChat"
@@ -163,14 +209,11 @@ ${m.message}`).join('\n\n')
         v-model="messages.filter(m => m.name === filterName && m.type == 'code')[0].message"
       />
 
-      <textarea
-        class="me-textarea"
-        ref="editor"
-        rows="20"
-        type="text"
+      <div style="flex: 1">
+      <HtmlEditor
         v-model="currentMessage"
-        @input="socket.emit('message', { message: currentMessage, name, displayname, type: 'code' })"
       />
+      </div>
 
       <Preview
         v-if="name === filterName && filterName !== 'chat'"

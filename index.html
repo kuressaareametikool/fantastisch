@@ -4,6 +4,26 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="./index.css">
+  <link rel="stylesheet" href="https://unpkg.com/codemirror/lib/codemirror.css">
+  <link rel="stylesheet" href="https://unpkg.com/codemirror/theme/material.css">
+  <style>
+    .CodeMirror {
+      font-family: Cousine, monospace;
+      padding: 15px;
+      height: calc(100vh);
+      line-height: 1.5em;
+    }
+    .CodeMirror-linenumber {
+      opacity: 0.25;
+    }
+    .CodeMirror-linenumbers {
+      margin-right: var(--base);
+    }
+    .CodeMirror .cm-header {
+      color: #C3E88D; /*#FFCB6B;*/
+      font-weight: normal;
+    }
+  </style>
 </head>
 <body>
   <script src="https://designstem.github.io/fachwerk/vendor.js"></script>
