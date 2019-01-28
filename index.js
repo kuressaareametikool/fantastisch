@@ -56,10 +56,13 @@ const HtmlEditor = {
       lineNumbers: true
     });
     setTimeout(() => this.editor.setValue(this.value), 300);
-    this.editor.on("change", debounce(editor => {
-        this.$emit("input", editor.getValue())
-    }, 100));
-    this.$watch('theme', newTheme => this.editor.setOption("theme", newTheme))
+    this.editor.on(
+      "change",
+      debounce(editor => {
+        this.$emit("input", editor.getValue());
+      }, 100)
+    );
+    this.$watch("theme", newTheme => this.editor.setOption("theme", newTheme));
   },
   template: `
   <div style="position: relative;">
@@ -80,22 +83,21 @@ new Vue({
     currentMessage: "",
     socket: null,
     theme: 0,
-    currentChat: '',
+    currentChat: "",
     chatMessages: []
   },
   mounted() {
-
     const messages = store.get("messages");
     if (messages) {
-      this.messages = messages
+      this.messages = messages;
     }
     const chatMessages = store.get("chatMessages");
     if (chatMessages) {
-      this.chatMessages = chatMessages
+      this.chatMessages = chatMessages;
     }
     const currentMessage = store.get("currentMessage");
     if (currentMessage) {
-      this.currentMessage = currentMessage
+      this.currentMessage = currentMessage;
     }
 
     const name = store.get("name");
@@ -109,16 +111,30 @@ new Vue({
 
     this.$watch("displayname", newDisplayname => {
       store.set("displayname", newDisplayname);
-      this.socket.emit('message', { message: this.currentMessage, name: this.name, displayname: this.displayname, type: 'code' })
+      this.socket.emit("message", {
+        message: this.currentMessage,
+        name: this.name,
+        displayname: this.displayname,
+        type: "code"
+      });
     });
 
-    this.$watch("currentMessage", currentMessage => {
-      store.set("currentMessage", currentMessage);
-    });
+    this.$watch(
+      "currentMessage",
+      currentMessage => {
+        store.set("currentMessage", currentMessage);
+        this.socket.emit("message", {
+          message: currentMessage,
+          name: this.name,
+          displayname: this.displayname,
+          type: "code"
+        });
+      }
+    );
 
     this.socket = io.connect("https://fantastischserver.now.sh");
     this.socket.on("message", m => {
-      if (m.name !== name && m.type == 'code') {
+      if (m.name !== name && m.type == "code") {
         const index = this.messages.findIndex(
           messages => messages.name === m.name
         );
@@ -129,7 +145,7 @@ new Vue({
         }
         store.set("messages", this.messages);
       }
-      if (m.type == 'chat') {
+      if (m.type == "chat") {
         this.chatMessages.push(m);
         store.set("chatMessages", this.chatMessages);
       }
@@ -157,6 +173,7 @@ new Vue({
     fetch('./examples.html')
       .then(res => res.text())
       .then(message => this.socket.emit('message', { name: '_examples', displayname: 'Examples', message, type: 'code' }))
+
   },
   template: `
     <Theme :theme="['blue','pink'][theme]">
