@@ -6,7 +6,7 @@ import Preview from "./components/Preview.js";
 import Theme from "./components/Theme.js";
 import ChatMessage from "./components/ChatMessage.js";
 
-import { animals } from "./names.js";
+import { pokemons } from "./names.js";
 
 const debounce = (fn, time) => {
   let timeout;
@@ -66,7 +66,7 @@ const HtmlEditor = {
   },
   template: `
   <div style="position: relative;">
-    <a title="Format code" @click="handleFormat" style="cursor: pointer; color: var(--me-textarea-color); opacity: 0.5; position: absolute; right: 8px; top: 5px; z-index: 1000000">❀</a>
+    <a title="Format code" @click="handleFormat" style="cursor: pointer; color: var(--me-textarea-color); opacity: 0.5; position: absolute; right: 15px; top: 10px; z-index: 1000000">❀</a>
     <div style="position: absolute; top: 0; right: 0; bottom: 0; left: 0;" ref="editor" />
   </div>
   `
@@ -102,7 +102,7 @@ new Vue({
 
     const name = store.get("name");
     const displayname = store.get("displayname");
-    this.name = name || titleCase(any(animals));
+    this.name = name || titleCase(any(pokemons));
     this.displayname = displayname || this.name;
     store.set("name", this.name);
     store.set("displayname", this.displayname);

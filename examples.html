@@ -23,11 +23,13 @@ This is a regular text.
   print(1 + 2 + 3)
 </script>
 
-<!-- 2. Generate HTML page with Javscript -->
+<!-- 3. Generate HTML page with Javascript -->
 
 <div id="app"></div>
 
 <script type="module">
+  
+  // User component
   const User = user => `
   <div style="
     border-left: 5px solid royalblue;
@@ -39,26 +41,31 @@ This is a regular text.
   </div>
 `;
 
+  // App component
   const App = users => `
   <h1>Users app</h1>
   ${users.map(User).join("")}
   `;
 
+  // Users data
   const users = [
     { name: "Tim", age: 20 },
     { name: "Suzy", age: 21 }
   ];
 
+  // Render the app
   document.getElementById("app").innerHTML = App(users);
 </script>
 
-<!-- 3. Use VueJS -->
+<!-- 4. Use VueJS -->
 
 <div id="vue-app"></div>
 
 <script type="module">
+  // Setup
   import Vue from "https://unpkg.com/vue@2.6.0-beta.2/dist/vue.esm.browser.js";
 
+  // User component
   const User = {
     props: ["user"],
     template: `
@@ -73,6 +80,7 @@ This is a regular text.
   `
   };
 
+  // App component
   const App = {
     components: { User },
     data: {
@@ -84,9 +92,64 @@ This is a regular text.
     template: `
 		<div>
 			<h1>Vue app</h1>
-  		<User v-for="user in users" :user="user" />
+  		<User v-for="(user,i) in users" :key="i" :user="user" />
   	</div>`
   };
 
+  // Render the app
   new Vue(App).$mount("#vue-app");
+</script>
+
+<!-- 5. Use React -->
+
+<div id="react-app"></div>
+
+<script src="https://unpkg.com/react@next/umd/react.development.js"></script>
+<script src="https://unpkg.com/react-dom@next/umd/react-dom.development.js"></script>
+<script type="module">
+  
+  // Setup
+  import htm from "https://unpkg.com/htm?module";
+  const html = htm.bind(React.createElement);
+
+  // User component
+  const User = ({ user }) => html`
+    <div
+      style=${{
+        borderLeft: "5px solid royalblue",
+        padding: "15px",
+        marginBottom: "5px"
+      }}
+    >
+      <h2>${user.name}</h2>
+      Age:${user.age}
+    </div>
+  `;
+
+  // App component
+  const App = ({ users }) => html`
+    <div>
+      <h1>React app</h1>
+      ${users.map(
+        (user,i) =>
+          html`
+            <${User} key=${i} user=${user} />
+          `
+      )}
+    </div>
+  `;
+
+  // Users data
+  const users = [
+    { name: "Tim", age: 20 },
+    { name: "Suzy", age: 21 }
+  ];
+
+  // Render the app
+  ReactDOM.render(
+    html`
+      <${App} users=${users} />
+    `,
+    document.getElementById("react-app")
+  );
 </script>
