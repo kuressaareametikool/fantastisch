@@ -26,10 +26,10 @@ const FEditorButton = {
 };
 
 const HtmlEditor = {
-  props: ["value"],
+  props: ["value", "theme"],
   data: () => ({ editor: null }),
   methods: {
-    onFormat() {
+    handleFormat() {
       const doc = this.editor.getDoc();
       const { ch, line } = doc.getCursor();
       const { formatted, cursorOffset } = prettier.formatWithCursor(
@@ -49,19 +49,21 @@ const HtmlEditor = {
   mounted() {
     this.editor = CodeMirror(this.$refs.editor, {
       mode: "htmlmixed",
-      theme: "material",
+      theme: this.theme,
       lineWrapping: true,
       viewportMargin: Infinity,
       tabSize: 2,
       lineNumbers: true
     });
-    this.editor.setValue(this.value);
+    setTimeout(() => this.editor.setValue(this.value), 300);
     this.editor.on("change", debounce(editor => {
         this.$emit("input", editor.getValue())
     }, 100));
+    this.$watch('theme', newTheme => this.editor.setOption("theme", newTheme))
   },
   template: `
   <div style="position: relative;">
+    <a title="Format code" @click="handleFormat" style="cursor: pointer; color: var(--me-textarea-color); opacity: 0.5; position: absolute; right: 8px; top: 5px; z-index: 1000000">❀</a>
     <div style="position: absolute; top: 0; right: 0; bottom: 0; left: 0;" ref="editor" />
   </div>
   `
@@ -73,7 +75,7 @@ new Vue({
   data: {
     name: "",
     displayname: "",
-    filterName: "",
+    filterName: "chat",
     messages: [],
     currentMessage: "",
     socket: null,
@@ -95,6 +97,7 @@ new Vue({
     if (currentMessage) {
       this.currentMessage = currentMessage
     }
+
     const name = store.get("name");
     const displayname = store.get("displayname");
     this.name = name || titleCase(any(animals));
@@ -145,6 +148,15 @@ new Vue({
 
     this.$refs.chat.focus();
 
+    const observer = new MutationObserver(
+      () =>
+        (this.$refs.chatMessages.scrollTop = this.$refs.chatMessages.scrollHeight)
+    );
+    observer.observe(this.$refs.chatMessages, { childList: true });
+
+    fetch('./examples.html')
+      .then(res => res.text())
+      .then(message => this.socket.emit('message', { name: '_examples', displayname: 'Examples', message, type: 'code' }))
   },
   template: `
     <Theme :theme="['blue','pink'][theme]">
@@ -177,7 +189,7 @@ new Vue({
         style="display: flex; flex-direction: column; flex: 0.9;
   height: 100vh; position: relative; padding: 15px; background: var(--user-textarea-bg)"
       >
-        <div style="flex: 1.5; overflow: auto;">
+        <div ref="chatMessages" style="flex: 1.5; overflow: auto;">
           <ChatMessage
             v-for="(message,i) in chatMessages"
             :key="i"
@@ -186,7 +198,7 @@ new Vue({
         </div>
         <textarea
           placeholder="Send a message to the group"
-          ref="editor"
+          ref="chat"
           class="me-textarea"
           style="flex: 0.5; background: var(--chat-textarea-bg); resize: none;"
           rows="20"
@@ -212,6 +224,7 @@ new Vue({
       <div style="flex: 1">
       <HtmlEditor
         v-model="currentMessage"
+        :theme="['material','paraiso-light'][theme]"
       />
       </div>
 

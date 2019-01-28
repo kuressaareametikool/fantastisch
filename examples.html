@@ -1,0 +1,84 @@
+<!-- Copy some of these examples to your code window -->
+
+<!-- 1. Setting nicer CSS styles -->
+
+<style>
+  body {
+    font-family: sans-serif;
+    margin: 0;
+    padding: 25px;
+    color: rgba(0, 0, 0, 0.9);
+  }
+</style>
+
+<h1>Hello world</h1>
+
+This is a regular text.
+
+<!-- 2. Generate HTML page with Javscript -->
+
+<div id="app"></div>
+
+<script type="module">
+  const User = user => `
+  <div style="
+    border-left: 5px solid royalblue;
+    padding: 15px;
+    margin-bottom: 5px;
+  ">
+    <h2>${user.name}</h2>
+		Age: ${user.age}
+  </div>
+`;
+
+  const App = users => `
+  <h1>Users app</h1>
+  ${users.map(User).join("")}
+  `;
+
+  const users = [
+    { name: "Tim", age: 20 },
+    { name: "Suzy", age: 21 }
+  ];
+
+  document.getElementById("app").innerHTML = App(users);
+</script>
+
+<!-- 3. Use VueJS -->
+
+<div id="vue-app"></div>
+
+<script type="module">
+  import Vue from "https://unpkg.com/vue@2.6.0-beta.2/dist/vue.esm.browser.js";
+
+  const User = {
+    props: ["user"],
+    template: `
+    <div style="
+      border-left: 5px solid royalblue;
+      padding: 15px;
+      margin-bottom: 5px;
+    ">
+      <h2>{{ user.name }}</h2>
+  		Age:{{ user.age }}
+    </div>
+  `
+  };
+
+  const App = {
+    components: { User },
+    data: {
+      users: [
+        { name: "Tim", age: 20 },
+        { name: "Suzy", age: 21 }
+      ]
+    },
+    template: `
+		<div>
+			<h1>Vue app</h1>
+  		<User v-for="user in users" :user="user" />
+  	</div>`
+  };
+
+  new Vue(App).$mount("#vue-app");
+</script>

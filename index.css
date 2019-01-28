@@ -105,3 +105,29 @@ height: 100vh;"
 }
 ::-moz-placeholder {
 }
+
+.CodeMirror {
+  font-family: Cousine, monospace;
+  padding: 15px;
+  height: calc(100vh);
+  line-height: 1.5em;
+}
+.CodeMirror-linenumber {
+  opacity: 0.25;
+}
+.CodeMirror-linenumbers {
+  margin-right: var(--base);
+}
+.CodeMirror .cm-header {
+  color: #C3E88D; /*#FFCB6B;*/
+  font-weight: normal;
+}
+.cm-s-paraiso-light.CodeMirror {
+  background: var(--me-textarea-bg);
+}
+.cm-s-paraiso-light.CodeMirror .cm-comment {
+  color: rgba(0,0,0,0.3);
+}
+.cm-s-paraiso-light .CodeMirror-gutters {
+  background: var(--me-textarea-bg);
+}
