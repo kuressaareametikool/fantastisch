@@ -1,4 +1,4 @@
-import { any, titleCase } from "https://designstem.github.io/fachwerk/utils.js";
+import { Vue, CodeMirror, utils, components, any, titleCase } from "https://designstem.github.io/fachwerk/fachwerk.js";
 
 import Me from "./components/Me.js";
 import User from "./components/User.js";
