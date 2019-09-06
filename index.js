@@ -1,4 +1,4 @@
-import { Vue, CodeMirror, utils, components, any, titleCase } from "https://designstem.github.io/fachwerk/fachwerk.js";
+import { Vue, CodeMirror, any, titlecase } from "https://designstem.github.io/fachwerk/fachwerk.js";
 
 import Me from "./components/Me.js";
 import User from "./components/User.js";
@@ -102,7 +102,7 @@ new Vue({
 
     const name = store.get("name");
     const displayname = store.get("displayname");
-    this.name = name || titleCase(any(pokemons));
+    this.name = name || titlecase(any(pokemons));
     this.displayname = displayname || this.name;
     store.set("name", this.name);
     store.set("displayname", this.displayname);
