@@ -132,7 +132,7 @@ new Vue({
       }
     );
 
-    this.socket = io.connect("https://fantastischserver.now.sh");
+    this.socket = io.connect("https://eka-server.now.sh");
     this.socket.on("message", m => {
       if (m.name !== name && m.type == "code") {
         const index = this.messages.findIndex(
